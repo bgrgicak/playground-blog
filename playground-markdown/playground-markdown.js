@@ -1,5 +1,4 @@
 (async function () {
-  console.log("hello", window.playgroundMarkdown, wpApiSettings.nonce);
   if (!window.playgroundMarkdown.markdown || !window.playgroundMarkdown.markdown.length) {
     return;
   }
@@ -8,8 +7,6 @@
   const { markdownToBlocks } = await import('../blocky-formats/src/markdown.js');
 
   for (let file of window.playgroundMarkdown.markdown) {
-  console.log("file", file.content);
-  console.log("blocks", markdownToBlocks(file.content));
     await fetch("/wp-json/wp/v2/posts", {
       method: "POST",
       headers: {
@@ -18,7 +15,7 @@
       },
       body: JSON.stringify({
         title: file.name,
-        content: markdownToBlocks(file.content),
+        content: JSON.stringify(markdownToBlocks(file.content)),
         status: "publish",
       }),
     });
