@@ -16,7 +16,7 @@
       body: JSON.stringify({
         title: file.name,
         // TODO content is empty
-        content: wp.blocks.serialize(markdownToBlocks(file.content)),
+        content: wp.blocks.serializeRawBlock(markdownToBlocks(file.content)),
         status: "publish",
       }),
     });
