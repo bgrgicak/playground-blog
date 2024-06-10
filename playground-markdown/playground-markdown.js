@@ -15,7 +15,7 @@
       },
       body: JSON.stringify({
         title: file.name,
-        content: markdownToBlocks(file.content),
+        content: wp.blocks.serialize(markdownToBlocks(file.content),
         status: "publish",
       }),
     });
