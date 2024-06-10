@@ -21,6 +21,6 @@
       }),
     });
   }
-  window.playgroundMarkdown.imported = true;
+  delete window.playgroundMarkdown.markdown;
   window.location.reload();
 })();
