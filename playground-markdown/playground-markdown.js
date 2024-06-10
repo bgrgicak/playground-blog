@@ -1,14 +1,14 @@
-(function () {
+(async function () {
   console.log("hello", window.playgroundMarkdown, wpApiSettings.nonce);
   if (!window.playgroundMarkdown.markdown) {
     return;
   }
 
   await import('../blocky-formats/vendor/commonmark.min.js');
-  const { markdownToBlocks, blocks2markdown } = await import('../blocky-formats/src/markdown.js');
+  const { markdownToBlocks } = await import('../blocky-formats/src/markdown.js');
   for (let file of window.playgroundMarkdown.markdown) {
     console.log("file", file);
-    fetch("/wp-json/wp/v2/posts", {
+    await fetch("/wp-json/wp/v2/posts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -16,9 +16,10 @@
       },
       body: JSON.stringify({
         title: file.name,
-        content: file.content,
+        content: markdownToBlocks(file.content),
         status: "publish",
       }),
     });
   }
+  window.location.reload();
 })();
