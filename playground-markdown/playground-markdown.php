@@ -7,7 +7,7 @@ Author: WordPress community
 */
 
 function playground_markdown_scripts() {
-    wp_register_script('playground-markdown', plugin_dir_url(__FILE__) . 'playground-markdown.js', array('wp-api'));
+    wp_register_script('playground-markdown', plugin_dir_url(__FILE__) . 'playground-markdown.js', array('wp-api', 'wp-blocks'));
     $dir = '/wordpress/wp-content/uploads/markdown';
     $files = array();
 

@@ -15,7 +15,7 @@
       },
       body: JSON.stringify({
         title: file.name,
-        content: JSON.stringify(markdownToBlocks(file.content)),
+        content: markdownToBlocks(file.content),
         status: "publish",
       }),
     });
