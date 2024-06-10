@@ -22,6 +22,5 @@
       }),
     });
   }
-  delete window.playgroundMarkdown.markdown;
-  window.location.reload();
+  //window.location.reload();
 })();

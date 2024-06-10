@@ -18,7 +18,7 @@ function playground_markdown_scripts() {
                     $filePath = $dir . '/' . $file;
                     $fileContent = file_get_contents($filePath);
 
-                    
+                    // Check if the file is already in the database
                     $post = get_page_by_title($file, OBJECT, 'post');
                     if ($post) {
                         continue;
