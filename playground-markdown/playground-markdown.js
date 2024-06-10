@@ -7,8 +7,6 @@
   const { markdownToBlocks } = await import('../blocky-formats/src/markdown.js');
 
   for (let file of window.playgroundMarkdown.markdown) {
-  console.log(markdownToBlocks(file.content));
-  console.log(wp.blocks.serialize(markdownToBlocks(file.content)));
     await fetch("/wp-json/wp/v2/posts", {
       method: "POST",
       headers: {
@@ -17,6 +15,7 @@
       },
       body: JSON.stringify({
         title: file.name,
+        // TODO content is empty
         content: wp.blocks.serialize(markdownToBlocks(file.content)),
         status: "publish",
       }),
