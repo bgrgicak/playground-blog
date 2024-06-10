@@ -6,7 +6,7 @@ Version: 1.0
 Author: WordPress community
 */
 
-function my_custom_plugin_scripts() {
+function playground_markdown_scripts() {
     wp_register_script('playground-markdown', plugin_dir_url(__FILE__) . 'playground-markdown.js', array('wp-api'));
     $dir = '/wordpress/wp-content/uploads/markdown';
     $files = array();
@@ -17,6 +17,13 @@ function my_custom_plugin_scripts() {
                 if ($file != "." && $file != "..") {
                     $filePath = $dir . '/' . $file;
                     $fileContent = file_get_contents($filePath);
+
+                    
+                    $post = get_page_by_title($file, OBJECT, 'post');
+                    if ($post) {
+                        continue;
+                    }
+
                     $files[] = array(
                         'path' => $filePath,
                         'name' => $file,
@@ -33,4 +40,4 @@ function my_custom_plugin_scripts() {
     wp_localize_script('playground-markdown', 'playgroundMarkdown', $data);
     wp_enqueue_script('playground-markdown');
 }
-add_action('wp_enqueue_scripts', 'my_custom_plugin_scripts');
+add_action('wp_enqueue_scripts', 'playground_markdown_scripts');
