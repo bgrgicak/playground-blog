@@ -1,0 +1,70 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "landingPage": "/",
+  "steps": [
+    {
+      "step": "login"
+    },
+    {
+      "step": "writeFile",
+      "path": "/wordpress/wp-content/mu-plugins/rewrite.php",
+      "data": "<?php add_action( 'after_setup_theme', function() { global $wp_rewrite; $wp_rewrite->set_permalink_structure('/%postname%/'); $wp_rewrite->flush_rules(); } );"
+    },
+    {
+      "step": "mkdir",
+      "path": "/wordpress/wp-content/uploads/markdown"
+    },
+    {
+      "step": "writeFile",
+      "path": "/wordpress/wp-content/uploads/markdown/hello.md",
+      "data": {
+        "resource": "url",
+        "url": "https://raw.githubusercontent.com/bgrgicak/playground-blog/main/posts/hello.md"
+      }
+    },
+    {
+      "step": "mkdir",
+      "path": "/wordpress/wp-content/plugins/playground-markdown"
+    },
+    {
+      "step": "installPlugin",
+      "pluginZipFile": {
+        "resource": "url",
+        "url": "https://github-proxy.com/proxy/?repo=dmsnell/blocky-formats"
+      },
+      "options": {
+        "activate": false
+      }
+    },
+    {
+      "step": "mv",
+      "fromPath": "/wordpress/wp-content/plugins/blocky-formats-trunk",
+      "toPath": "/wordpress/wp-content/plugins/blocky-formats"
+    },
+
+
+    {
+      "step": "activatePlugin",
+      "pluginPath": "playground-markdown/playground-markdown.php"
+    },
+    {
+      "step": "installPlugin",
+      "pluginZipFile": {
+        "resource": "url",
+        "url": "https://github-proxy.com/proxy/?repo=dmsnell/blocky-formats"
+      },
+      "options": {
+        "activate": false
+      }
+    },
+    {
+      "step": "mv",
+      "fromPath": "/wordpress/wp-content/plugins/blocky-formats-trunk",
+      "toPath": "/wordpress/wp-content/plugins/blocky-formats"
+    },
+    {
+      "step": "activatePlugin",
+      "pluginPath": "blocky-formats/blocky-formats.php"
+    }
+  ]
+}
