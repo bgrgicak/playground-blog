@@ -5,6 +5,8 @@
 
   await import('../blocky-formats/vendor/commonmark.min.js');
   const { markdownToBlocks } = await import('../blocky-formats/src/markdown.js');
+  console.log(markdownToBlocks(file.content));
+  console.log(wp.blocks.serialize(markdownToBlocks(file.content)));
 
   for (let file of window.playgroundMarkdown.markdown) {
     await fetch("/wp-json/wp/v2/posts", {
@@ -15,7 +17,7 @@
       },
       body: JSON.stringify({
         title: file.name,
-        content: wp.blocks.serialize(markdownToBlocks(file.content),
+        content: wp.blocks.serialize(markdownToBlocks(file.content)),
         status: "publish",
       }),
     });
