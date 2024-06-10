@@ -8,6 +8,8 @@
   const { markdownToBlocks } = await import('../blocky-formats/src/markdown.js');
 
   for (let file of window.playgroundMarkdown.markdown) {
+  console.log("file", file.content);
+  console.log("blocks", markdownToBlocks(file.content));
     await fetch("/wp-json/wp/v2/posts", {
       method: "POST",
       headers: {
