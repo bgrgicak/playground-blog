@@ -7,6 +7,9 @@
   const { markdownToBlocks } = await import('../blocky-formats/src/markdown.js');
 
   for (let file of window.playgroundMarkdown.markdown) {
+  console.log(file.content);
+  console.log(markdownToBlocks(file.content));
+  console.log(wp.blocks.serializeRawBlock(markdownToBlocks(file.content)));
     await fetch("/wp-json/wp/v2/posts", {
       method: "POST",
       headers: {
@@ -23,6 +26,6 @@
   }
 
   if (window.location.pathname !== "/category/uncategorized/") {
-    window.open("/category/uncategorized/", "_self");
+    //window.open("/category/uncategorized/", "_self");
   }
 })();
