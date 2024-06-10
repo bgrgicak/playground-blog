@@ -1,15 +1,27 @@
 (async function () {
-  if (!window.playgroundMarkdown.markdown || !window.playgroundMarkdown.markdown.length) {
+  if (
+    !window.playgroundMarkdown.markdown ||
+    !window.playgroundMarkdown.markdown.length
+  ) {
     return;
   }
 
-  await import('../blocky-formats/vendor/commonmark.min.js');
-  const { markdownToBlocks } = await import('../blocky-formats/src/markdown.js');
+  await import("../blocky-formats/vendor/commonmark.min.js");
+  const { markdownToBlocks } = await import(
+    "../blocky-formats/src/markdown.js"
+  );
 
   for (let file of window.playgroundMarkdown.markdown) {
-  console.log(file.content);
-  console.log(markdownToBlocks(file.content));
-  console.log(wp.blocks.serializeRawBlock(markdownToBlocks(file.content)));
+    console.log(file.content);
+    console.log(markdownToBlocks(file.content));
+
+    const content = markdownToBlocks(file.content).map((block) => ({
+      ...block,
+      blockName: block.name,
+      attrs: block.attributes,
+    }));
+    console.log(content);
+    console.log(wp.blocks.serializeRawBlock(content));
     await fetch("/wp-json/wp/v2/posts", {
       method: "POST",
       headers: {
@@ -19,7 +31,7 @@
       body: JSON.stringify({
         title: file.name,
         // TODO content is empty
-        content: wp.blocks.serializeRawBlock(markdownToBlocks(file.content)),
+        content: wp.blocks.serializeRawBlock(content),
         status: "publish",
       }),
     });
