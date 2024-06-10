@@ -8,7 +8,6 @@
   const { markdownToBlocks } = await import('../blocky-formats/src/markdown.js');
 
   for (let file of window.playgroundMarkdown.markdown) {
-    console.log("file", file);
     await fetch("/wp-json/wp/v2/posts", {
       method: "POST",
       headers: {
@@ -22,5 +21,8 @@
       }),
     });
   }
-  //window.location.reload();
+
+  if (window.location.pathname !== "/category/uncategorized/") {
+    window.open("/category/uncategorized/", "_self");
+  }
 })();
