@@ -1,6 +1,5 @@
 (async function () {
-  console.log("hello", window.playgroundMarkdown, wpApiSettings.nonce);
-  if (!window.playgroundMarkdown.markdown) {
+  if (!window.playgroundMarkdown.markdown || !window.playgroundMarkdown.markdown.length) {
     return;
   }
 
