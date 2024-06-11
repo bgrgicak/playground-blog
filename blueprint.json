@@ -6,6 +6,14 @@
       "step": "login"
     },
     {
+        "step": "runSql",
+        "sql": {
+            "resource": "literal",
+            "name": "schema.sql",
+            "contents": "DELETE FROM wp_posts"
+        }
+    },
+    {
       "step": "writeFile",
       "path": "/wordpress/wp-content/mu-plugins/rewrite.php",
       "data": "<?php add_action( 'after_setup_theme', function() { global $wp_rewrite; $wp_rewrite->set_permalink_structure('/%postname%/'); $wp_rewrite->flush_rules(); } );"
