@@ -22,15 +22,14 @@ body.playground-markdown-loading::after {
     bottom: 50%;
     left: 50%;
     width: 100%;
-    height: 10px;
-    max-width: 60vw;
-	height: 4px;
     background: #3858e9;
-    max-width: 60vw;
+    max-width: 512px;
 	height: 4px;
     overflow: hidden;
     display: flex;
     align-items: center;
+	border-radius: 10px;
     z-index: 10000;
+	margin: 4px auto;
     transform: translate(-50%, 30px);
   }
