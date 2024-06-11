@@ -6,6 +6,8 @@
     return;
   }
 
+  document.body.classList.add('loading');
+
   await import("../blocky-formats/vendor/commonmark.min.js");
   const { markdownToBlocks } = await import(
     "../blocky-formats/src/markdown.js"
@@ -35,4 +37,6 @@
   if (window.location.pathname !== "/category/uncategorized/") {
     window.open("/category/uncategorized/", "_self");
   }
+
+  document.body.classList.remove('loading');
 })();
