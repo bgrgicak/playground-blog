@@ -6,7 +6,9 @@
     return;
   }
 
-  document.body.classList.add('loading');
+  document.addEventListener("DOMContentLoaded", function() {
+    document.body.classList.add('loading');
+  });
 
   await import("../blocky-formats/vendor/commonmark.min.js");
   const { markdownToBlocks } = await import(

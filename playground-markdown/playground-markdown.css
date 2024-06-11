@@ -1,6 +1,6 @@
 
 body.loading::before {
-    content: 'Loading posts...';
+    content: 'Loading posts';
     display: flex;
     position: fixed;
     top: 0;
