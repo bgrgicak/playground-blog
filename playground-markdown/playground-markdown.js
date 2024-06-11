@@ -26,7 +26,7 @@
       },
       body: JSON.stringify({
         title: file.name,
-        content,
+        content: content.join(""),
         status: "publish",
       }),
     });
