@@ -1,5 +1,5 @@
 
-body.loading::before {
+body.playground-markdown-loading::before {
     content: 'Loading posts';
     display: flex;
     position: fixed;

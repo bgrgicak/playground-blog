@@ -43,3 +43,10 @@ function playground_markdown_scripts() {
     wp_enqueue_style('playground-markdown', plugin_dir_url(__FILE__) . 'playground-markdown.css');
 }
 add_action('wp_enqueue_scripts', 'playground_markdown_scripts');
+
+
+function playground_markdown_loader($classes) {
+    $classes[] = 'playground-markdown-loading';
+    return $classes;
+}
+add_filter('body_class', 'playground_markdown_loader');

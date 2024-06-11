@@ -1,14 +1,16 @@
 (async function () {
+
+  function endLoading() {
+    document.body.classList.remove('playground-markdown-loading');
+  }
+
   if (
     !window.playgroundMarkdown.markdown ||
     !window.playgroundMarkdown.markdown.length
   ) {
+    endLoading();
     return;
   }
-
-  document.addEventListener("DOMContentLoaded", function() {
-    document.body.classList.add('loading');
-  });
 
   await import("../blocky-formats/vendor/commonmark.min.js");
   const { markdownToBlocks } = await import(
@@ -40,5 +42,5 @@
     window.open("/category/uncategorized/", "_self");
   }
 
-  document.body.classList.remove('loading');
+  endLoading();
 })();
