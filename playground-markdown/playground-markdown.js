@@ -15,14 +15,13 @@
     console.log(file.content);
     console.log(markdownToBlocks(file.content));
 
-    const content = markdownToBlocks(file.content).map((block) => ({
-      ...block,
+    const content = markdownToBlocks(file.content).map((block) => wp.blocks.serializeRawBlock({
       blockName: block.name,
       attrs: block.attributes,
+      innerBlocks: block.innerBlocks,
       innerContent: [block.attributes.content],
     }));
     console.log(content);
-    console.log(wp.blocks.serializeRawBlock(content));
     await fetch("/wp-json/wp/v2/posts", {
       method: "POST",
       headers: {
