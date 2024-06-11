@@ -12,13 +12,11 @@
   );
 
   for (let file of window.playgroundMarkdown.markdown) {
-    console.log(file.content);
-    console.log(markdownToBlocks(file.content));
-
     const content = markdownToBlocks(file.content).map((block) => ({
       ...block,
       blockName: block.name,
       attrs: block.attributes,
+      innerContent: [block.attributes.content],
     }));
     console.log(content);
     console.log(wp.blocks.serializeRawBlock(content));
@@ -38,6 +36,6 @@
   }
 
   if (window.location.pathname !== "/category/uncategorized/") {
-    //window.open("/category/uncategorized/", "_self");
+    window.open("/category/uncategorized/", "_self");
   }
 })();
