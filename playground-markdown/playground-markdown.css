@@ -1,6 +1,6 @@
 
 body.playground-markdown-loading::before {
-    content: 'Loading posts';
+    content: 'Loading posts...';
     display: flex;
     position: fixed;
     top: 0;
@@ -11,6 +11,26 @@ body.playground-markdown-loading::before {
     z-index: 9999;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
-    font-weight: bold;
+	font-weight: 400;
+	font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+	font-size: 1.1rem;
 }
+
+body.playground-markdown-loading::after {
+    content: '';
+    position: fixed;
+    bottom: 50%;
+    left: 50%;
+    width: 100%;
+    height: 10px;
+    max-width: 60vw;
+	height: 4px;
+    background: #3858e9;
+    max-width: 60vw;
+	height: 4px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    z-index: 10000;
+    transform: translate(-50%, 30px);
+  }
