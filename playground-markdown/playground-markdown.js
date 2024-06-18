@@ -49,7 +49,7 @@
   }
 
   if (window.location.pathname !== "/category/uncategorized/") {
-    //window.open("/category/uncategorized/", "_self");
+    window.open("/category/uncategorized/", "_self");
   } else {
     endLoading();
   }
