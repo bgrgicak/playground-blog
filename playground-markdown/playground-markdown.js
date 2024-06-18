@@ -19,12 +19,21 @@
 
   for (let file of window.playgroundMarkdown.markdown) {
   console.log(JSON.stringify(markdownToBlocks(file.content)));
-    const content = markdownToBlocks(file.content).map((block) => wp.blocks.serializeRawBlock({
-      blockName: block.name,
-      attrs: block.attributes,
-      innerBlocks: block.innerBlocks,
-      innerContent: [block.attributes.content],
-    })).join("");
+    const content = markdownToBlocks(file.content).map((block) => {
+      const data = {
+        blockName: block.name,
+        attrs: block.attributes,
+        innerBlocks: block.innerBlocks,
+        innerContent: [block.attributes.content],
+      };
+      if ( data.blockName === "core/image" && data.attrs.url ) {
+        const attachment =  window.playgroundMarkdown.attachments.find(attachment => attachment['local_path'] === data.attrs.url);
+        if ( attachment ) {
+          data.attrs.url = attachment['url'];
+        }
+      }
+      return wp.blocks.serializeRawBlock(data);
+    }).join("");
     await fetch("/wp-json/wp/v2/posts", {
       method: "POST",
       headers: {
