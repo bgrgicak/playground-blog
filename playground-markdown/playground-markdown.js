@@ -18,7 +18,7 @@
   );
 
   for (let file of window.playgroundMarkdown.markdown) {
-  console.log(markdownToBlocks(file.content));
+  console.log(JSON.stringify(markdownToBlocks(file.content)));
     const content = markdownToBlocks(file.content).map((block) => wp.blocks.serializeRawBlock({
       blockName: block.name,
       attrs: block.attributes,
@@ -40,7 +40,7 @@
   }
 
   if (window.location.pathname !== "/category/uncategorized/") {
-    window.open("/category/uncategorized/", "_self");
+    //window.open("/category/uncategorized/", "_self");
   } else {
     endLoading();
   }
