@@ -7,8 +7,6 @@ Author: WordPress community
 */
 
 function playground_markdown_scripts() {
-    global $markdown_parsed;
-
     wp_register_script('playground-markdown', plugin_dir_url(__FILE__) . 'playground-markdown.js', array('wp-api', 'wp-blocks', 'wp-plugins'));
     $dir = '/wordpress/wp-content/uploads/markdown';
     $files = array();
@@ -36,7 +34,7 @@ function playground_markdown_scripts() {
                         'name' => $file,
                         'content' => $fileContent,
                     );
-                } else if (!$markdown_parsed){
+                } else {
                     $wp_filetype = wp_check_filetype(basename($filePath), null);
                     $attachment = array(
                         'post_mime_type' => $wp_filetype['type'],
@@ -55,7 +53,6 @@ function playground_markdown_scripts() {
                 }
             }
             closedir($dh);
-            $markdown_parsed = true;
         }
     }
     $data = array(

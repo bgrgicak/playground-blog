@@ -31,7 +31,6 @@
           data.attrs.url = attachment['url'];
         }
       }
-      console.log(JSON.stringify(data));
       return wp.blocks.serializeRawBlock(data);
     }).join("");
     await fetch("/wp-json/wp/v2/posts", {
