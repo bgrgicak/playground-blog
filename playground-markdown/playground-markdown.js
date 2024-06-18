@@ -18,7 +18,6 @@
   );
 
   for (let file of window.playgroundMarkdown.markdown) {
-  console.log(JSON.stringify(markdownToBlocks(file.content)));
     const content = markdownToBlocks(file.content).map((block) => {
       const data = {
         blockName: block.name,
@@ -32,6 +31,7 @@
           data.attrs.url = attachment['url'];
         }
       }
+      console.log(JSON.stringify(data));
       return wp.blocks.serializeRawBlock(data);
     }).join("");
     await fetch("/wp-json/wp/v2/posts", {
