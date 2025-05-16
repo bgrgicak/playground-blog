@@ -31,7 +31,13 @@
           data.attrs.url = attachment['url'];
         }
       }
-      return wp.blocks.serializeRawBlock(data);
+      let serializedContent = wp.blocks.serializeRawBlock(data);
+      // Check if the serialized content starts with "<" to determine if it contains HTML tags or XML
+      if (!serializedContent.trim().startsWith("<")) {
+        // Wrap the content in a <p> tag if it doesn't start with "<"
+        serializedContent = `<p>${serializedContent}</p>`;
+      }
+      return serializedContent;
     }).join("");
     await fetch("/wp-json/wp/v2/posts", {
       method: "POST",
